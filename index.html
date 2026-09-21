@@ -450,40 +450,30 @@
 
     search.addEventListener('input', () => {
         const query = search.value.trim().toLowerCase();
-    
         let visibleCount = 0;
-    
         navGroups.forEach(group => {
             let groupVisible = false;
-    
             group.querySelectorAll('a').forEach(link => {
-    
                 const href = link.getAttribute('href');
-                const target = href
-                    ? document.querySelector(href)
-                    : null;
-    
-                const textMatch =
-                    link.textContent.toLowerCase().includes(query);
-    
-                const articleMatch =
-                    target &&
-                    target.textContent.toLowerCase().includes(query);
-    
+                let articleText = '';
+                if (href && href.startsWith('#')) {
+                    const target = document.getElementById(href.substring(1));
+                    if (target) {
+                        articleText = target.textContent.toLowerCase();
+                    }
+                }
                 const visible =
-                    !query || textMatch || articleMatch;
-    
+                    !query ||
+                    link.textContent.toLowerCase().includes(query) ||
+                    articleText.includes(query);
                 link.hidden = !visible;
-    
                 if (visible) {
                     groupVisible = true;
                     visibleCount++;
                 }
             });
-    
             group.hidden = !groupVisible;
         });
-    
         emptySearch.style.display =
             visibleCount ? 'none' : 'block';
     });
