@@ -449,37 +449,43 @@
     const emptySearch = document.getElementById('emptySearch');
 
     search.addEventListener('input', () => {
-      const query = search.value.trim().toLocaleLowerCase('it');
-      // Articoli che contengono il testo cercato
-      const matchingArticleIds = new Set();
-      if (query) {
-        document.querySelectorAll('.article').forEach(article => {
-          if (article.textContent.toLocaleLowerCase('it').includes(query)) {
-            matchingArticleIds.add(article.id);
-          }
+        const query = search.value.trim().toLowerCase();
+    
+        let visibleCount = 0;
+    
+        navGroups.forEach(group => {
+            let groupVisible = false;
+    
+            group.querySelectorAll('a').forEach(link => {
+    
+                const href = link.getAttribute('href');
+                const target = href
+                    ? document.querySelector(href)
+                    : null;
+    
+                const textMatch =
+                    link.textContent.toLowerCase().includes(query);
+    
+                const articleMatch =
+                    target &&
+                    target.textContent.toLowerCase().includes(query);
+    
+                const visible =
+                    !query || textMatch || articleMatch;
+    
+                link.hidden = !visible;
+    
+                if (visible) {
+                    groupVisible = true;
+                    visibleCount++;
+                }
+            });
+    
+            group.hidden = !groupVisible;
         });
-      }
-      let visibleCount = 0;
-      navGroups.forEach(group => {
-        const links = [...group.querySelectorAll('a')];
-        let groupVisible = false;
-        links.forEach(link => {
-          const href = link.getAttribute('href');
-          const targetId = href?.startsWith('#')
-            ? href.substring(1)
-            : '';
-          const matchIndice = link.textContent.toLocaleLowerCase('it').includes(query);
-          const matchArticolo =  matchingArticleIds.has(targetId);
-          const visible = !query || matchIndice || matchArticolo;
-          link.hidden = !visible;
-          if (visible) {
-            groupVisible = true;
-            visibleCount++;
-          }
-        });
-        group.hidden = !groupVisible;
-      });
-      emptySearch.style.display = visibleCount ? 'none' : 'block';
+    
+        emptySearch.style.display =
+            visibleCount ? 'none' : 'block';
     });
 
     document.getElementById('toggleNav').addEventListener('click', () => {
