@@ -1,7 +1,7 @@
 {
-    "name": "Cronaca del Giorno negli Annali degli Eldar",
-    "short_name": "Ainulindalë",
-    "description": "Il calendario elfico di Imladris",
+    "name": "La Costituzione della R.E.G.I.N.A.",
+    "short_name": "R.E.G.I.N.A.",
+    "description": "La Costituzione della R.E.G.I.N.A.",
     "lang": "it",
     "start_url": "./",
     "scope": "./",
