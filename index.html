@@ -183,11 +183,6 @@
         border-radius:12px;
         box-shadow:0 4px 16px rgba(0,0,0,.15);
     }
-    .header-content{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
     .header-logo{
       width:140px;
       height:auto;
@@ -195,14 +190,12 @@
   </style>
 </head>
 <body>
-  <header class="topbar">
+  <header class="topbar" style="margin-top: 20px">
     <div class="topbar-inner">
-        <div class="header-content">
           <img src="assets/logo.png" class="header-logo">
           <p class="eyebrow">Testo costituzionale · Edizione digitale</p>
           <h1>La COSTITUZIONE<br>della R.E.G.I.N.A.</h1>
           <p class="subtitle">Regno Eterno e Glorioso Illuminato da Numerose Api</p>
-        </div>
       <div class="top-actions">
         <a href="#indice">☷ Indice</a>
         <a href="costituzione.pdf" target="_blank" rel="noopener">↗ Apri il testo originale della Costituzione</a>
@@ -221,7 +214,7 @@
         </div>
         <p class="search-hint">Filtra libri, titoli e articoli.</p>
       </div>
-      <nav id="navList">
+      <nav id="navList" hidden>
         <div class="nav-group">
           <a class="nav-heading" href="#libro-1">Libro I · Principi fondamentali</a>
           <a class="nav-sub" href="#art-1">Art. 1 <small>— La R.E.G.I.N.A.</small></a>
