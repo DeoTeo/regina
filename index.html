@@ -183,17 +183,30 @@
         border-radius:12px;
         box-shadow:0 4px 16px rgba(0,0,0,.15);
     }
+    .header-content{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .header-logo{
+      width:140px;
+      height:auto;
+    }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <p class="eyebrow">Testo costituzionale · Edizione digitale</p>
-      <h1>La COSTITUZIONE<br>della R.E.G.I.N.A.</h1>
-      <p class="subtitle">Regno Eterno e Glorioso Illuminato da Numerose Api</p>
+        <div class="header-content">
+          <img src="assets/logo.png" class="header-logo">
+          <p class="eyebrow">Testo costituzionale · Edizione digitale</p>
+          <h1>La COSTITUZIONE<br>della R.E.G.I.N.A.</h1>
+          <p class="subtitle">Regno Eterno e Glorioso Illuminato da Numerose Api</p>
+        </div>
       <div class="top-actions">
         <a href="#indice">☷ Indice</a>
-        <a href="costituzione.pdf" target="_blank" rel="noopener">↗ Apri il documento originale</a>
+        <a href="costituzione.pdf" target="_blank" rel="noopener">↗ Apri il testo originale della Costituzione</a>
+        <a href="God_Save_The_R.E.G.I.N.A..pdf" target="_blank" rel="noopener">↗ Apri il testo dell'Inno Ufficiale</a>
       </div>
       <button class="btn secondary mobile-nav-toggle" id="toggleNav" type="button">Mostra / nascondi indice</button>
     </div>
@@ -442,14 +455,32 @@
 
     search.addEventListener('input', () => {
       const query = search.value.trim().toLocaleLowerCase('it');
+      // Articoli che contengono il testo cercato
+      const matchingArticleIds = new Set();
+      if (query) {
+        document.querySelectorAll('.article').forEach(article => {
+          if (article.textContent.toLocaleLowerCase('it').includes(query)) {
+            matchingArticleIds.add(article.id);
+          }
+        });
+      }
       let visibleCount = 0;
       navGroups.forEach(group => {
         const links = [...group.querySelectorAll('a')];
         let groupVisible = false;
         links.forEach(link => {
-          const matches = !query || link.textContent.toLocaleLowerCase('it').includes(query);
-          link.hidden = !matches;
-          if (matches) { groupVisible = true; visibleCount++; }
+          const href = link.getAttribute('href');
+          const targetId = href?.startsWith('#')
+            ? href.substring(1)
+            : '';
+          const matchIndice = link.textContent.toLocaleLowerCase('it').includes(query);
+          const matchArticolo =  matchingArticleIds.has(targetId);
+          const visible = !query || matchIndice || matchArticolo;
+          link.hidden = !visible;
+          if (visible) {
+            groupVisible = true;
+            visibleCount++;
+          }
         });
         group.hidden = !groupVisible;
       });
