@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#800000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>La Costituzione della R.E.G.I.N.A.</title>
+  <style>
+    :root {
+      --maroon: #800000;
+      --maroon-dark: #5e0000;
+      --maroon-soft: #f6eeee;
+      --paper: #ffffff;
+      --page: #f4f5f7;
+      --ink: #242424;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --shadow: 0 8px 28px rgba(31, 41, 55, .07);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    a { color: var(--maroon); }
+    button, input { font: inherit; }
+
+    .topbar {
+      background: var(--maroon);
+      color: white;
+      padding: max(16px, env(safe-area-inset-top)) 20px 22px;
+    }
+    .topbar-inner, .layout {
+      width: min(1160px, 100%);
+      margin: 0 auto;
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: .72rem;
+      font-weight: 700;
+      opacity: .8;
+    }
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      line-height: 1.12;
+      font-weight: 600;
+    }
+    .subtitle { margin: 10px 0 0; color: #f1dddd; max-width: 660px; }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .top-actions a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 13px; border: 1px solid rgba(255,255,255,.38);
+      border-radius: 999px; color: white; text-decoration: none;
+      font-size: .9rem;
+    }
+    .top-actions a:hover { background: rgba(255,255,255,.12); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 22px;
+      padding: 22px 18px 40px;
+      align-items: start;
+    }
+    aside {
+      position: sticky; top: 16px;
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .aside-head { padding: 16px; border-bottom: 1px solid var(--line); }
+    .aside-head h2 { margin: 0 0 10px; color: var(--maroon); font-size: 1rem; }
+    .search-wrap { position: relative; }
+    .search-wrap input {
+      width: 100%; border: 1px solid #d1d5db; border-radius: 10px;
+      padding: 11px 12px; outline: none; background: #fff;
+    }
+    .search-wrap input:focus { border-color: var(--maroon); box-shadow: 0 0 0 3px #80000018; }
+    .search-hint { color: var(--muted); font-size: .75rem; margin: 7px 1px 0; }
+    nav { max-height: min(68vh, 760px); overflow: auto; padding: 8px; }
+    .nav-group { margin: 6px 0 10px; }
+    .nav-heading {
+      display: block; padding: 9px 10px; color: var(--maroon);
+      font-weight: 750; font-size: .82rem; text-transform: uppercase;
+      letter-spacing: .035em; text-decoration: none; border-radius: 8px;
+    }
+    .nav-heading:hover { background: var(--maroon-soft); }
+    .nav-sub { display: block; margin: 2px 0 2px 10px; padding: 6px 10px;
+      color: #454545; font-size: .88rem; text-decoration: none; border-radius: 7px; }
+    .nav-sub:hover { background: #f3f4f6; color: var(--maroon); }
+    .nav-sub small { color: var(--muted); }
+    .content { min-width: 0; }
+    .welcome, .book-card, .reader-card {
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .welcome { padding: clamp(18px, 4vw, 30px); margin-bottom: 18px; }
+    .welcome h2 { color: var(--maroon); font: 600 clamp(1.35rem, 3vw, 1.8rem)/1.25 Georgia, serif; margin: 0 0 10px; }
+    .welcome p { margin: 8px 0; }
+    .notice {
+      border-left: 4px solid var(--maroon); background: var(--maroon-soft);
+      padding: 12px 14px; border-radius: 0 9px 9px 0; margin-top: 16px;
+      font-size: .9rem;
+    }
+    .book-card { margin: 18px 0; overflow: hidden; scroll-margin-top: 14px; }
+    .book-title {
+      margin: 0; padding: 18px 22px; background: #fbf8f8;
+      border-bottom: 1px solid var(--line); color: var(--maroon);
+      font: 600 clamp(1.15rem, 3vw, 1.55rem)/1.3 Georgia, serif;
+    }
+    .book-intro { padding: 15px 22px; color: #4b5563; border-bottom: 1px solid var(--line); }
+    .book-intro p { margin: 0; }
+    .article-list { padding: 8px 18px 18px; }
+    .article {
+      padding: 17px 4px 18px; border-bottom: 1px solid var(--line);
+      scroll-margin-top: 14px;
+    }
+    .article:last-child { border-bottom: 0; }
+    .article h3 {
+      color: var(--maroon); margin: 0 0 8px; font-size: 1.02rem;
+      font-weight: 750; display: flex; align-items: baseline; gap: 9px;
+    }
+    .article h3 .num { white-space: nowrap; }
+    .article p { margin: 7px 0; text-align: justify}
+    .article ul { margin: 8px 0; padding-left: 23px; }
+    .reader-card { padding: 20px; margin-top: 18px; }
+    .reader-card h2 { margin: 0 0 8px; color: var(--maroon); font: 600 1.45rem Georgia, serif; }
+    .reader-card p { margin: 8px 0; }
+    .reader-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+    .btn {
+      border: 0; border-radius: 9px; background: var(--maroon); color: white;
+      padding: 10px 14px; cursor: pointer; text-decoration: none; display: inline-block;
+      font-weight: 650; font-size: .9rem;
+    }
+    .btn.secondary { background: #f3f4f6; color: var(--maroon); border: 1px solid #e5dada; }
+    .pdf-frame {
+      width: 100%; height: 78vh; min-height: 520px; border: 1px solid var(--line);
+      border-radius: 10px; background: #f9fafb;
+    }
+    .footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 12px 18px 28px; }
+    .empty { display: none; padding: 20px; color: var(--muted); text-align: center; }
+    .mobile-nav-toggle { display: none; }
+    mark { background: #fff0b3; color: inherit; padding: 0 .1em; }
+
+    @media (max-width: 800px) {
+      .layout { display: block; padding: 14px 12px 30px; }
+      aside { position: static; margin-bottom: 14px; }
+      nav { max-height: 42vh; }
+      .mobile-nav-toggle { display: inline-flex; margin-top: 12px; }
+      .pdf-frame { height: 70vh; min-height: 440px; }
+    }
+    @media (max-width: 480px) {
+      .topbar { padding-left: 16px; padding-right: 16px; }
+      .book-title { padding: 16px; }
+      .book-intro { padding: 13px 16px; }
+      .article-list { padding: 4px 16px 12px; }
+      .article { padding: 15px 0; }
+      .pdf-frame { min-height: 380px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <p class="eyebrow">Testo costituzionale · Edizione digitale</p>
+      <h1>La COSTITUZIONE<br>della R.E.G.I.N.A.</h1>
+      <p class="subtitle">Regno Eterno e Glorioso Illuminato da Numerose Api</p>
+      <div class="top-actions">
+        <a href="#indice">☷ Indice</a>
+        <a href="#testo-integrale">▤ PDF integrale</a>
+        <a href="https://github.com/DeoTeo/costituzione/blob/gh-pages/assets/costituzione.pdf" target="_blank" rel="noopener">↗ Apri il documento originale</a>
+      </div>
+      <button class="btn secondary mobile-nav-toggle" id="toggleNav" type="button">Mostra / nascondi indice</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside id="indice">
+      <div class="aside-head">
+        <h2>Indice della Costituzione</h2>
+        <div class="search-wrap">
+          <input id="search" type="search" placeholder="Cerca nell’indice…" aria-label="Cerca nell’indice">
+        </div>
+        <p class="search-hint">Filtra libri, titoli e articoli. Per cercare nel testo integrale usa la ricerca del lettore PDF.</p>
+      </div>
+      <nav id="navList">
+        <div class="nav-group">
+          <a class="nav-heading" href="#libro-1">Libro I · Principi fondamentali</a>
+          <a class="nav-sub" href="#art-1">Art. 1 <small>— La R.E.G.I.N.A.</small></a>
+          <a class="nav-sub" href="#art-2">Art. 2</a><a class="nav-sub" href="#art-3">Art. 3</a>
+          <a class="nav-sub" href="#art-4">Art. 4</a><a class="nav-sub" href="#art-5">Art. 5</a>
+          <a class="nav-sub" href="#art-6">Art. 6</a><a class="nav-sub" href="#art-7">Art. 7</a>
+          <a class="nav-sub" href="#art-8">Art. 8</a><a class="nav-sub" href="#art-9">Art. 9</a>
+          <a class="nav-sub" href="#art-10">Art. 10</a><a class="nav-sub" href="#art-11">Art. 11</a>
+          <a class="nav-sub" href="#art-12">Art. 12</a>
+        </div>
+        <div class="nav-group">
+          <a class="nav-heading" href="#libro-2">Libro II · I comandamenti</a>
+          <a class="nav-sub" href="#art-13">Art. 13</a><a class="nav-sub" href="#art-14">Art. 14</a>
+          <a class="nav-sub" href="#art-15">Art. 15</a><a class="nav-sub" href="#art-16">Art. 16</a>
+          <a class="nav-sub" href="#art-17">Art. 17</a><a class="nav-sub" href="#art-18">Art. 18</a>
+          <a class="nav-sub" href="#art-19">Art. 19</a><a class="nav-sub" href="#art-20">Art. 20</a>
+          <a class="nav-sub" href="#art-21">Art. 21</a><a class="nav-sub" href="#art-22">Art. 22</a>
+        </div>
+        <div class="nav-group">
+          <a class="nav-heading" href="#libro-3">Libro III · La casa</a>
+          <a class="nav-sub" href="#art-23">Art. 23</a><a class="nav-sub" href="#art-24">Art. 24</a>
+          <a class="nav-sub" href="#art-25">Art. 25</a><a class="nav-sub" href="#art-26">Art. 26</a>
+          <a class="nav-sub" href="#art-27">Art. 27</a><a class="nav-sub" href="#art-28">Art. 28</a>
+          <a class="nav-sub" href="#art-29">Art. 29</a><a class="nav-sub" href="#art-30">Art. 30</a>
+          <a class="nav-sub" href="#art-31">Art. 31</a><a class="nav-sub" href="#art-32">Art. 32</a>
+          <a class="nav-sub" href="#art-33">Art. 33</a><a class="nav-sub" href="#art-34">Art. 34</a>
+          <a class="nav-sub" href="#art-35">Art. 35</a><a class="nav-sub" href="#art-36">Art. 36</a>
+          <a class="nav-sub" href="#art-37">Art. 37</a><a class="nav-sub" href="#art-38">Art. 38</a>
+          <a class="nav-sub" href="#art-39">Art. 39</a><a class="nav-sub" href="#art-40">Art. 40</a>
+        </div>
+        <div class="nav-group">
+          <a class="nav-heading" href="#libro-4">Libro IV · Matteo</a>
+          <a class="nav-sub" href="#titolo-1">Titolo I · Del Re</a>
+          <a class="nav-sub" href="#art-41">Art. 41</a><a class="nav-sub" href="#art-42">Art. 42</a>
+          <a class="nav-sub" href="#art-43">Art. 43</a><a class="nav-sub" href="#art-44">Art. 44</a>
+          <a class="nav-sub" href="#art-45">Art. 45</a><a class="nav-sub" href="#art-46">Art. 46</a>
+          <a class="nav-sub" href="#art-47">Art. 47</a><a class="nav-sub" href="#art-48">Art. 48</a>
+          <a class="nav-sub" href="#art-49">Art. 49</a><a class="nav-sub" href="#art-50">Art. 50</a>
+          <a class="nav-sub" href="#art-51">Art. 51</a><a class="nav-sub" href="#art-52">Art. 52</a>
+          <a class="nav-sub" href="#art-53">Art. 53</a><a class="nav-sub" href="#art-54">Art. 54</a>
+          <a class="nav-sub" href="#art-55">Art. 55</a><a class="nav-sub" href="#art-56">Art. 56</a>
+          <a class="nav-sub" href="#titolo-2">Titolo II · Delle relazioni economiche e finanziarie</a>
+          <a class="nav-sub" href="#art-57">Art. 57</a><a class="nav-sub" href="#art-58">Art. 58</a>
+          <a class="nav-sub" href="#titolo-3">Titolo III · Delle assemblee</a>
+          <a class="nav-sub" href="#art-59">Art. 59</a><a class="nav-sub" href="#art-60">Art. 60</a>
+          <a class="nav-sub" href="#art-61">Art. 61</a>
+          <a class="nav-sub" href="#titolo-4">Titolo IV · Dei capitoli generali</a>
+          <a class="nav-sub" href="#art-62">Art. 62</a><a class="nav-sub" href="#art-63">Art. 63</a>
+          <a class="nav-sub" href="#art-64">Art. 64</a><a class="nav-sub" href="#art-65">Art. 65</a>
+        </div>
+        <div class="nav-group">
+          <a class="nav-heading" href="#libro-5">Libro V · Disposizioni transitorie e finali</a>
+          <a class="nav-sub" href="#disp-I">Disposizione I</a><a class="nav-sub" href="#disp-II">Disposizione II</a>
+          <a class="nav-sub" href="#disp-III">Disposizione III</a><a class="nav-sub" href="#disp-IV">Disposizione IV</a>
+          <a class="nav-sub" href="#disp-V">Disposizione V</a><a class="nav-sub" href="#disp-VI">Disposizione VI</a>
+          <a class="nav-sub" href="#disp-VII">Disposizione VII</a>
+        </div>
+        <div class="nav-group">
+          <a class="nav-heading" href="#libro-6">Libro VI · Appendice</a>
+          <a class="nav-sub" href="#modulo-a">Modulo A · Presa visione</a>
+          <a class="nav-sub" href="#modulo-b">Modulo B · Accesso alle stanze</a>
+          <a class="nav-sub" href="#modulo-c">Modulo C · Organizzazione settimanale</a>
+          <a class="nav-sub" href="#modulo-d">Modulo D · T.A.C.</a>
+          <a class="nav-sub" href="#modulo-e">Modulo E · Verbale</a>
+        </div>
+      </nav>
+      <div class="empty" id="emptySearch">Nessuna voce corrispondente.</div>
+    </aside>
+
+    <section class="content">
+      <section class="welcome">
+        <h2>Consultazione</h2>
+        <p>Questa pagina organizza l’indice secondo i libri, i titoli, gli articoli e i moduli riportati nel documento. Seleziona una voce per raggiungere il relativo punto della pagina.</p>
+        <div class="notice"><strong>Testo autentico:</strong> per conservare fedelmente impaginazione, formulazioni e modulistica, il documento completo è disponibile nel lettore PDF qui sotto. L’indice consente di orientarsi tra le sue parti; la ricerca nel testo si effettua tramite la funzione di ricerca del lettore PDF.</div>
+      </section>
+
+      <section class="book-card" id="libro-1">
+        <h2 class="book-title">Libro I · PRINCIPI FONDAMENTALI</h2>
+        <div class="book-intro"><p>Nei primi 12 articoli vengono affermati i principi fondamentali della R.E.G.I.N.A., con riferimento alla realtà sociale e ai possibili sviluppi politici e sociali.</p></div>
+        <div class="article-list">
+          <article class="article" id="art-1"><h3><span class="num">Art. 1</span></h3><p>La R.E.G.I.N.A. è una Monarchia costituzionale, fondata in nome della giustizia, dell’altruismo e della gentilezza. La sovranità appartiene alla R.E.G.I.N.A. stessa, che la esercita nelle forme e nei limiti della Costituzione. R.E.G.I.N.A. è acronimo di Regno Eterno e Glorioso Illuminato da Numerose Api.</p><p>A capo della R.E.G.I.N.A. si colloca il suo sovrano Matteo, per grazia di Dio Re della R.E.G.I.N.A., difensore della Fede, Arcitesoriere e Principe elettore, Signore Celeste, Pater Patriæ, Imperator, Dictator Perpetuus, Divus Iulius.</p></article>
+          <article class="article" id="art-2"><h3>Art. 2</h3><p>La R.E.G.I.N.A. riconosce e garantisce i diritti inviolabili dell’uomo, sia come singolo sia nelle formazioni sociali ove si svolge la sua personalità, e richiede l’adempimento dei doveri inderogabili di solidarietà politica, economica e sociale.</p></article>
+          <article class="article" id="art-3"><h3>Art. 3</h3><p>Tutti i cittadini hanno pari dignità sociale e sono uguali davanti alla legge, senza distinzione di sesso, di razza, di lingua, di religione, di opinioni politiche, di condizioni personali e sociali. È compito della R.E.G.I.N.A. rimuovere gli ostacoli di ordine economico e sociale, che, limitando di fatto la libertà e l’eguaglianza dei cittadini, impediscono il pieno sviluppo della persona umana e l’effettiva partecipazione di tutti i lavoratori all’organizzazione politica, economica e sociale del Paese.</p></article>
+          <article class="article" id="art-4"><h3>Art. 4</h3><p>La R.E.G.I.N.A. riconosce a tutti i cittadini il diritto a essere individui migliori degli altri e promuove le condizioni che rendono effettivo questo diritto. Ogni cittadino ha il diritto di svolgere, secondo le proprie possibilità e la propria scelta, un’attività o una funzione che concorra al progresso materiale o spirituale della società.</p></article>
+          <article class="article" id="art-5"><h3>Art. 5</h3><p>L’animale ufficiale della R.E.G.I.N.A. è l’Apis mellifera, comunemente nota con il termine ape. Tutti i cittadini della R.E.G.I.N.A. devono ambire a essa come punto di riferimento nel mondo. Le api sono diverse dagli altri animali in quanto sono estremamente concentrate sui propri doveri e sono dedicate alla cooperazione tra simili.</p></article>
+          <article class="article" id="art-6"><h3>Art. 6</h3><p>Il motto ufficiale della R.E.G.I.N.A. è «Le api non sprecano il loro tempo a spiegare alle mosche che il nettare è più buono della merda». Deve essere considerato come il mantra durante tutta la vita di ogni cittadino della R.E.G.I.N.A., per riuscire sempre a distinguersi dagli altri grazie alle caratteristiche e alle qualità uniche e innate di chiunque faccia parte della R.E.G.I.N.A..</p></article>
+          <article class="article" id="art-7"><h3>Art. 7</h3><p>La R.E.G.I.N.A. tutela tutte le maggioranze linguistiche e religiose, senza alcuna distinzione o preferenza.</p></article>
+          <article class="article" id="art-8"><h3>Art. 8</h3><p>Tutti i cittadini devono essere assegnati a una casa della Scuola di Magia e Stregoneria di Hogwarts. Le quattro case sono: Serpeverde, Grifondoro, Tassorosso e Corvonero. Tutti i membri della R.E.G.I.N.A. sono considerati uguali davanti alla legge indipendentemente dalla loro casa di appartenenza.</p></article>
+          <article class="article" id="art-9"><h3>Art. 9</h3><p>La R.E.G.I.N.A. promuove lo sviluppo della cultura e della ricerca, sia essa scientifica, tecnica, sanitaria, letteraria o di qualsiasi altra natura.</p></article>
+          <article class="article" id="art-10"><h3>Art. 10</h3><p>L’ordinamento giuridico della R.E.G.I.N.A. si conforma alle norme del diritto internazionale generalmente riconosciute. La condizione giuridica dello straniero è regolata dalla legge in conformità delle norme e dei trattati internazionali.</p></article>
+          <article class="article" id="art-11"><h3>Art. 11</h3><p>La R.E.G.I.N.A. ripudia la guerra come strumento di offesa alla libertà degli altri popoli e come mezzo di risoluzione delle controversie internazionali; consente, anche in condizioni di disparità con gli altri Stati, alle limitazioni di sovranità necessarie ad un ordinamento che assicuri la pace e la giustizia totalitaria; promuove e favorisce le organizzazioni internazionali rivolte a tale scopo.</p></article>
+          <article class="article" id="art-12"><h3>Art. 12</h3><p>La Bandiera ufficiale della R.E.G.I.N.A. è quella riprodotta nel documento. L’ape regina racchiusa nella corona d’alloro rappresenta la superiorità assoluta incarnata nella figura del Re e di tutti i membri della R.E.G.I.N.A.. In caso di disastri o eventi avversi, capovolgere repentinamente sottosopra la Bandiera e riportarla nella configurazione iniziale una volta superato l’evento. L’inno ufficiale è definito dal Re e prende il nome di «God Save The R.E.G.I.N.A.».</p></article>
+        </div>
+      </section>
+
+      <section class="book-card" id="libro-2">
+        <h2 class="book-title">Libro II · I COMANDAMENTI</h2>
+        <div class="book-intro"><p>Questa parte riporta le regole principali e i dogmi della R.E.G.I.N.A., concepiti come istruzioni per guidare la vita di ciascuno.</p></div>
+        <div class="article-list">
+          <article class="article" id="art-13"><h3>Art. 13</h3><p>Ciascun membro della R.E.G.I.N.A. deve mirare alle caratteristiche peculiari dell’animale guida del Regno: operosità, diligenza, laboriosità e organizzazione sociale, abbondanza, ricchezza e rinascita, purezza, saggezza, speranza e la virtù del sacrificio per il bene comune.</p></article>
+          <article class="article" id="art-14"><h3>Art. 14</h3><p>Chiunque deve essere gentile nei confronti degli altri. La gentilezza può conquistare il mondo anche all’esterno della R.E.G.I.N.A..</p></article>
+          <article class="article" id="art-15"><h3>Art. 15</h3><p>Essere sempre se stessi in ogni situazione. Meglio comportarsi con naturalezza piuttosto che pentirsene in un secondo momento.</p></article>
+          <article class="article" id="art-16"><h3>Art. 16</h3><p>Ci sarà sempre qualcuno che avrà da ridire su un qualsiasi aspetto della nostra vita. Tanto vale essere genuini e limpidi sempre. L’invidia è l’arma che usano gli altri per giustificare i propri insuccessi. L’importante è che parlino di noi, non avendo argomenti propri che attrarrebbero l’attenzione altrui.</p></article>
+          <article class="article" id="art-17"><h3>Art. 17</h3><p>Se la gentilezza ex ante non viene apprezzata, passare alla normale convivenza, riadattandola al contesto cui si fa riferimento.</p></article>
+          <article class="article" id="art-18"><h3>Art. 18</h3><p>Per aspera sic itur ad astra. Ubi maior minor cessat. Omnia tempus habet.</p></article>
+          <article class="article" id="art-19"><h3>Art. 19</h3><p>In caso di conflitto prevedibile e/o incompatibilità con un soggetto terzo, creare una situazione di indifferenza. Se la compatibilità con il soggetto terzo è prossima allo zero, combattere la maleducazione e ignoranza con il sorriso, consapevoli che questa è l’arma migliore che un cittadino della R.E.G.I.N.A. ha a sua disposizione.</p></article>
+          <article class="article" id="art-20"><h3>Art. 20</h3><p>Ciascuno ha le sue battaglie interiori da combattere, non pretendere di essere gli unici ad avere pensieri o situazioni importanti da gestire. Rispettare i silenzi e i tempi altrui.</p></article>
+          <article class="article" id="art-21"><h3>Art. 21</h3><p>Chi ha interesse di rimanere, rimarrà. Chi non ha interesse di rimanere, che venga lasciato libero di prendere la decisione che preferisce. Il regalo più grande che si può fare a qualcuno è il proprio tempo, perché quando si regala a qualcuno il proprio tempo, si regala un pezzo della propria vita che non ritornerà mai indietro.</p></article>
+          <article class="article" id="art-22"><h3>Art. 22</h3><p>Si ripudiano: il non rispetto dell’altro, l’arancione e i jeans.</p></article>
+        </div>
+      </section>
+
+      <section class="book-card" id="libro-3">
+        <h2 class="book-title">Libro III · LA CASA</h2>
+        <div class="book-intro"><p>Regole per il normale e civile comportamento all’interno delle abitazioni della R.E.G.I.N.A.; la violazione può comportare l’allontanamento secondo quanto descritto nel documento.</p></div>
+        <div class="article-list">
+          <article class="article" id="art-23"><h3>Art. 23</h3><p>La casa è il nucleo della vita di un cittadino della R.E.G.I.N.A., da cui tutto inizia e in cui tutto termina. Bisogna avere massima cura sia della propria casa che di quelle altrui, rispettandone in entrambi i casi i ritmi e le abitudini.</p></article>
+          <article class="article" id="art-24"><h3>Art. 24</h3><p>È necessario stabilire una routine quotidiana, che va dal momento del risveglio al momento del riposo: la giornata deve sempre essere organizzata in ogni suo dettaglio, considerando i tempi di lavoro, di studio, di attività fisica, di riposo e di tempo libero. Si rimanda al Libro IV per maggiori dettagli circa i moduli che devono essere necessariamente compilati.</p></article>
+          <article class="article" id="art-25"><h3>Art. 25</h3><p>Le faccende domestiche sono tra le attività più importanti, anche loro necessitano di una routine ben pianificata. Devono essere eseguite almeno una volta a settimana (anche se la settimana viene considerata dal lunedì al venerdì).</p></article>
+          <article class="article" id="art-26"><h3>Art. 26</h3><p>Di fondamentale importanza sono i momenti dedicati all’igiene personale di ogni membro della R.E.G.I.N.A.. Ciascun cittadino deve provvedere alla cura della propria persona almeno una volta al giorno e deve accertarsi di inserirla nella routine quotidiana delle varie attività a lui predisposte.</p></article>
+          <article class="article" id="art-27"><h3>Art. 27</h3><p>Tutti i documenti presenti in Appendice e riportati negli articoli della presente Costituzione hanno validità singola, se non diversamente specificato negli articoli e/o moduli stessi. In caso di soggetti terzi appartenenti al nucleo famigliare biologico e non giuridico fino al primo grado di parentela è concesso il privilegio di firmare i documenti una tantum.</p></article>
+          <article class="article" id="art-28"><h3>Art. 28</h3><p>Gli ospiti devono prendere visione della presente Costituzione con la compilazione in ogni campo del modulo A riportato in Appendice, riportando anche data e ora della compilazione. Il suddetto modulo ha validità per la singola permanenza riportata e non è utilizzabile per più di una volta.</p></article>
+          <article class="article" id="art-29"><h3>Art. 29</h3><p>Gli ospiti devono saper rispettare i propri spazi, permanendo principalmente nel soggiorno; devono chiedere il permesso per prendere qualsiasi cosa che non sia loro e non possono entrare in camera da letto, a meno che il permesso non venga accordato con il Re. Lo spostamento tra le stanze è consentito previa compilazione del modulo B.</p></article>
+          <article class="article" id="art-30"><h3>Art. 30</h3><p>Colazioni, pranzi e cene sono obbligatoriamente da consumarsi a tavola, sia essa della cucina o del soggiorno. Eventuali merende possono essere consumate in luoghi diversi. Si intendono “merende” tutti quei pasti fuori dalle fasce orarie 06:00-09:00, 12:00-14:00 e 19:00-21:00. Il primo comma non viene applicato al Re.</p></article>
+          <article class="article" id="art-31"><h3>Art. 31</h3><p>Tutti i membri della R.E.G.I.N.A. devono avere cura delle proprie cose. La R.E.G.I.N.A. non risponde per alcun bene materiale o immateriale che subisce danni o non viene più ritrovato, sia durante che dopo la permanenza. Ogni cittadino deve imparare a prendersi cura di sé in ogni ambito, da quello sociale a quello personale, pulizia della propria persona e degli oggetti utilizzati.</p></article>
+          <article class="article" id="art-32"><h3>Art. 32</h3><p>È assolutamente necessario togliere le scarpe appena entrati in casa. È consentito camminare a piedi scalzi, oppure portare dalla propria abitazione un paio di ciabatte ben tenute e pulite. Rimane comunque obbligatorio chiedere al Re il permesso di poggiare i piedi su sedie, cuscini, divano e/o letto.</p></article>
+          <article class="article" id="art-33"><h3>Art. 33</h3><p>È obbligatorio per tutti riordinare qualsiasi cosa venga spostata durante la permanenza.</p></article>
+          <article class="article" id="art-34"><h3>Art. 34</h3><p>Qualsiasi indumento che si decide di rimuovere dal proprio corpo deve essere ripreso a fine permanenza. Durante la permanenza tutti i capi di abbigliamento devono essere mantenuti in ordine e riposti dove indicato dal Re.</p></article>
+          <article class="article" id="art-35"><h3>Art. 35</h3><p>I brindisi effettuati durante i pranzi e/o le cene che si tengono presso un’abitazione di cui regolamento, devono iniziare con la frase: «Cento anni di felicità, sempre vissuti in buona salute e come il vostro cuore desidera. Auguri.», recitata da una persona e tenendosi per mano. È assolutamente vietato pronunciare la parola “Cin” o simili, e si ripudia il colpo tra i calici.</p></article>
+          <article class="article" id="art-36"><h3>Art. 36</h3><p>In qualunque occasione sia richiesta la necessità di entrare in una stanza chiusa, occorre battere alla porta con le nocche della mano secondo la sequenza indicata nel documento: «doppio colpo rapido, nome della persona oltre la porta, doppio colpo rapido, nome della persona oltre la porta, doppio colpo rapido, nome della persona oltre la porta». Solo con risposta affermativa si può aprire. In caso di allarme o occasione non prevista, senza pronunciare nomi, la sequenza è «doppio colpo rapido, colpo singolo lento, doppio colpo rapido». Questo articolo non viene applicato al Re.</p></article>
+          <article class="article" id="art-37"><h3>Art. 37</h3><p>Qualsiasi documento riportante il monogramma della R.E.G.I.N.A. è da considerarsi documento ufficiale della Monarchia. Tutti i documenti devono essere conservati in un luogo sicuro per sempre. La perdita o il non ritrovamento di un documento fa cadere automaticamente la sua validità e la cessazione del suo contenuto. In questi casi sarà necessario procedere alla compilazione di un nuovo documento. Nessun documento può in alcun caso essere retrodatato.</p></article>
+          <article class="article" id="art-38"><h3>Art. 38</h3><p>La presente Costituzione viene considerata il nucleo rigido di tutte le leggi della R.E.G.I.N.A.. Essa racchiude tutti i principi fondamentali e diritti inviolabili per ogni suo cittadino.</p></article>
+          <article class="article" id="art-39"><h3>Art. 39</h3><p>Gerarchicamente la Costituzione è seguita dalle fonti primarie e fonti secondarie dello Stato in cui viene applicata. Si considerano fonti primarie le leggi ordinarie dello Stato e aventi forza di legge e le leggi regionali. Si considerano invece fonti secondarie i regolamenti governativi, regolamenti regionali e degli enti locali. Infine vengono applicati tutti gli usi e consuetudini vigenti.</p></article>
+          <article class="article" id="art-40"><h3>Art. 40</h3><p>Per qualsiasi argomento non contemplato nella presente Costituzione si rimanda ai codici e testi elencati nel documento, tra cui i codici penale, civile, di procedura, della strada, del consumo, e il Libro dei Morti Egiziano. In caso di sovrapposizione di regolamenti, si considera come riferimento l’articolo o gli articoli della Costituzione della R.E.G.I.N.A..</p></article>
+        </div>
+      </section>
+
+      <section class="book-card" id="libro-4">
+        <h2 class="book-title">Libro IV · MATTEO</h2>
+        <div class="book-intro"><p>Parte descritta nel documento come nucleo della Costituzione; gli articoli sono applicabili a Matteo e ai soggetti terzi che entrano in contatto con lui.</p></div>
+        <div class="article-list">
+          <h3 id="titolo-1" style="color:var(--maroon);margin:18px 0 6px">TITOLO I · Del Re</h3>
+          <article class="article" id="art-41"><h3>Art. 41</h3><p>Matteo è la massima autorità della R.E.G.I.N.A., la sua posizione di massimo potere non può essere messa in discussione da nessuno, neppure da lui stesso.</p></article>
+          <article class="article" id="art-42"><h3>Art. 42</h3><p>Il Re si impegna a rispettare tutti gli articoli della presente Costituzione, senza alcuna eccezione. Sottoscrive la Costituzione in ogni sua parte e promette di non infrangerla in nessuna occasione.</p></article>
+          <article class="article" id="art-43"><h3>Art. 43</h3><p>Qualsiasi decisione che riguarda sia il Re che uno o più soggetti terzi deve essere condivisa e approvata da tutte le parti. Il momento di discussione deve avvenire pacificamente e senza distrazioni dall’esterno, arrivando a una soluzione di comune accordo. È consentito parlare di argomenti relativi anche solo a uno dei soggetti coinvolti e chiedere il parere dell’altro/i; non è necessario richiedere preavviso per trovare un momento di dialogo.</p></article>
+          <article class="article" id="art-44"><h3>Art. 44</h3><p>Deve esserci un preavviso di almeno 24 ore per determinare un’uscita con il Re. In caso di preavviso inferiore a 24 ore dalla data presunta dell’uscita, il Re può comunque valutare di effettuarla.</p></article>
+          <article class="article" id="art-45"><h3>Art. 45</h3><p>È necessario compilare periodicamente un calendario settimanale per regolamentare qualsiasi attività che riguarda il Re ed eventuali soggetti terzi. Per fare questo è possibile utilizzare l’apposito modulo C.</p></article>
+          <article class="article" id="art-46"><h3>Art. 46</h3><p>L’attività sportiva è promossa in ogni sua forma e in ogni stagione. Le preferite sono il nuoto, i giri in bicicletta, le camminate all’aperto e la pratica sciistica. Si considera comunque attività sportiva un giro in moto, sia essa con il motociclo del Re che eventualmente con uno terzo. Attività sportive quali il nuoto devono essere svolte almeno 2 volte alla settimana, secondo calendario definito dal Re ed eventuali soggetti terzi in unanime accordo, compilabile attraverso il modulo C.</p></article>
+          <article class="article" id="art-47"><h3>Art. 47</h3><p>Sono riconosciuti al Re ed eventuali soggetti terzi momenti di studio e/o lavoro a casa. Questi momenti devono essere stabiliti secondo orario settimanale, compilando il modulo C. Devono essere garantiti rispetto per gli ambienti dedicati a queste attività e silenzio per non disturbare l’altro/i.</p></article>
+          <article class="article" id="art-48"><h3>Art. 48</h3><p>Il Re si impegna a interessarsi ai soggetti terzi da lui ospitati, a rispettarli e a consigliarli al meglio delle proprie capacità. Il Re ed eventuali soggetti terzi, nei loro principali ambiti di interesse e cultura, si impegnano a colmare le lacune e necessità dell’altro/i.</p></article>
+          <article class="article" id="art-49"><h3>Art. 49</h3><p>Per invitare terzi nell’abitazione, siano essi famigliari o amici, è necessario un preavviso di almeno 2 giorni. Il Re si impegna a far firmare ai soggetti terzi tutti i moduli necessari al soggiorno. Non è necessario compilare i moduli per soggetti terzi appartenenti al nucleo famigliare biologico e non giuridico fino al primo grado di parentela.</p></article>
+          <article class="article" id="art-50"><h3>Art. 50</h3><p>La musica è promossa in tutte le sue forme, esecutive o uditive. Il momento può essere condiviso o individuale, purché non leda la libertà di nessuno. Gli strumenti ufficiali sono il flauto traverso e il violino; gli altri sono riconosciuti, ma considerati di ordine inferiore.</p></article>
+          <article class="article" id="art-51"><h3>Art. 51</h3><p>La lettura è promossa in tutte le sue forme e in qualsiasi luogo. È considerata un importante momento culturale e intimo per chi lo pratica e in quanto tale non può essere interrotto se non per volontà del praticante.</p></article>
+          <article class="article" id="art-52"><h3>Art. 52</h3><p>Nonostante il Re abbia già un proprio animale domestico, è possibile considerarne uno terzo: solamente un Phodopus campbelli, comunemente noto come criceto, che assumerà il nome “Teddy” seguito dal numero romano ordinale della generazione. L’animale non deve essere lasciato solo per più di 24 ore; in tal caso il Re deve portarlo con sé e/o stabilire un calendario per la sua cura. È necessario compilare il modulo C per il Re e per il soggetto terzo affidatario.</p></article>
+          <article class="article" id="art-53"><h3>Art. 53</h3><p>È necessario stabilire, attraverso il modulo C, gli orari per la spesa, il lavaggio dei vestiti e le pulizie. Se una di queste attività viene svolta esclusivamente dal Re, un eventuale soggetto terzo garantisce di non lamentarsi dell’operato del Re. Il Re può valutare suggerimenti di terzi ed eventualmente applicare un cambiamento nella propria mansione.</p></article>
+          <article class="article" id="art-54"><h3>Art. 54</h3><p>In caso di vacanza comune con il Re, tutti gli articoli della Costituzione si mantengono immutati e ugualmente applicabili. Si considera vacanza la permanenza in un’abitazione terza al Re per più di 24 ore e almeno a 35 km di distanza da una residenza e/o domicilio dello stesso.</p></article>
+          <article class="article" id="art-55"><h3>Art. 55</h3><p>In caso di litigio e/o incomprensione, il Re e il soggetto terzo coinvolto si impegnano a discutere pacificamente e a individuare una soluzione efficace al conflitto nel minor tempo possibile.</p></article>
+          <article class="article" id="art-56"><h3>Art. 56</h3><p>Il Re ha la facoltà di classificare qualsiasi soggetto terzo tramite il modulo D. Il modulo, una volta compilato, può essere aggiornato e riproposto a discrezione del Re. Non esiste un valore di soglia per la classificazione, ma lo strumento può essere utilizzato in qualsiasi occasione qualora il Re lo ritenga necessario.</p></article>
+
+          <h3 id="titolo-2" style="color:var(--maroon);margin:22px 0 6px">TITOLO II · Delle relazioni economiche e finanziarie</h3>
+          <article class="article" id="art-57"><h3>Art. 57</h3><p>Se il Re lo ritiene necessario, è possibile stabilire un fondo cassa in comune con uno o più soggetti terzi. La quota depositata periodicamente deve essere uguale per tutte le parti. È consentito tenere uno storico delle spese in uscita e in entrata nella maniera ritenuta più utile.</p></article>
+          <article class="article" id="art-58"><h3>Art. 58</h3><p>Le spese che riguardano il Re e uno o più eventuali soggetti terzi devono essere pagate in comune. Se una delle parti non è in condizione di pagare, l’altra parte gestisce la spesa complessiva; quando il soggetto non pagante potrà, dovrà restituire una somma pari alla quota della spesa di cui ha beneficiato.</p></article>
+
+          <h3 id="titolo-3" style="color:var(--maroon);margin:22px 0 6px">TITOLO III · Delle assemblee</h3>
+          <article class="article" id="art-59"><h3>Art. 59</h3><p>Con il termine assemblea si intendono momenti conviviali informali extra programma settimanale.</p></article>
+          <article class="article" id="art-60"><h3>Art. 60</h3><p>Non è necessario stabilire riunioni periodiche tra il Re ed eventuali soggetti terzi, in quanto tutto è già stato regolamentato. Tuttavia, se il Re lo ritiene necessario, anche sotto consiglio di un soggetto terzo, è possibile indire una riunione. È concesso discutere di qualsiasi argomento, condiviso o meno da entrambe le parti coinvolte.</p></article>
+          <article class="article" id="art-61"><h3>Art. 61</h3><p>Le assemblee devono essere definite in termini di orario con almeno 2 giorni di anticipo. In caso di impossibilità di uno dei soggetti coinvolti, è obbligatorio informare l’altro con almeno 24 ore di anticipo. Le assemblee non possono essere interrotte.</p></article>
+
+          <h3 id="titolo-4" style="color:var(--maroon);margin:22px 0 6px">TITOLO IV · Dei capitoli generali</h3>
+          <article class="article" id="art-62"><h3>Art. 62</h3><p>Il Re può indire una seduta dei capitoli generali della R.E.G.I.N.A. in qualunque momento desideri. Ne viene immediatamente nominato giudice supremo e imparziale. Il Re può nominare a sua discrezione fino ad altri quattro membri del consiglio, non obbligatoriamente gli stessi della seduta precedente.</p></article>
+          <article class="article" id="art-63"><h3>Art. 63</h3><p>I membri nominati dal Re hanno facoltà di risposta fino a 24 ore prima della data indetta del capitolo generale. In caso di mancata risposta, verranno automaticamente considerati assenti e non potranno presiedere in alcun modo al capitolo generale.</p></article>
+          <article class="article" id="art-64"><h3>Art. 64</h3><p>Durante le sedute dei capitoli generali è consentito discutere di qualsiasi argomento. Per determinare un verdetto finale è necessario procedere a una votazione per alzata di mano. Vince la maggioranza assoluta. In caso di impossibilità nel determinare un giudizio finale, il Re ha l’ultima parola e il suo giudizio è insindacabile.</p></article>
+          <article class="article" id="art-65"><h3>Art. 65</h3><p>Il verbale di ogni seduta dei capitoli generali è compilabile tramite il modulo E presente in Appendice. È necessario compilare un nuovo verbale per ogni seduta.</p></article>
+        </div>
+      </section>
+
+      <section class="book-card" id="libro-5">
+        <h2 class="book-title">Libro V · DISPOSIZIONI TRANSITORIE E FINALI</h2>
+        <div class="book-intro"><p>Disposizioni per il passaggio all’ordinamento monarchico e per la promulgazione della Costituzione.</p></div>
+        <div class="article-list">
+          <article class="article" id="disp-I"><h3>Disposizione I</h3><p>Con l’entrata in vigore della Costituzione, Matteo esercita le attribuzioni di Re della R.E.G.I.N.A. e ne assume il titolo.</p></article>
+          <article class="article" id="disp-II"><h3>Disposizione II</h3><p>Per sottoscrivere la Costituzione, il Re ha utilizzato una penna stilografica con inchiostro Blu Royal. Per qualsiasi atto ufficiale e non, è obbligatorio utilizzare una penna stilografica con punta piccola oppure media, salvo eccezioni quali cataclismi e/o fine del mondo. È consentito l’utilizzo di grafite di qualsiasi durezza.</p></article>
+          <article class="article" id="disp-III"><h3>Disposizione III</h3><p>Il monogramma ufficiale del Re deve essere inserito al centro dell’intestazione di qualunque documento ufficiale prodotto in nome della R.E.G.I.N.A., nella configurazione riportata nel documento. Rappresenta le iniziali del Re, un’ape regina, la corona reale e la corona d’alloro avvolta in un nastro bordeaux e disseminata di bacche.</p></article>
+          <article class="article" id="disp-IV"><h3>Disposizione IV</h3><p>La Bandiera ufficiale deve essere esibita in almeno una stanza di ogni abitazione della R.E.G.I.N.A. nella configurazione riportata. Rappresenta un’ape regina munita di corona e scettro circondata da una corona d’alloro semplificata, su sfondo celeste. Si rimanda all’Art. 12 per ulteriori dettagli.</p></article>
+          <article class="article" id="disp-V"><h3>Disposizione V</h3><p>Riporta il testo ufficiale dell’inno nazionale «God Save The R.E.G.I.N.A.». Il testo è stato scritto in italiano e inglese e non può essere tradotto o modificato.</p><p>God save our R.E.G.I.N.A.<br>long live our R.E.G.I.N.A.<br>our gracious Queen.<br>Con il Matteo<br>al suo servizio<br>possa viver per sempre<br>la R.E.G.I.N.A..<br>All of Her articles<br>scritti con il cuor<br>e con amor.<br>She will defend the law<br>and ever give us cause<br>per cantare con il cuor<br>la R.E.G.I.N.A..</p></article>
+          <article class="article" id="disp-VI"><h3>Disposizione VI</h3><p>L’autorità sovrana è quella del Re. Possono essere conferiti ulteriori titoli nobiliari a discrezione del Re. È riconosciuta anche la monarchia britannica esclusivamente nella persona di Sua Maestà la Regina Elisabetta II, con i titoli e la formulazione riportati nel documento.</p></article>
+          <article class="article" id="disp-VII"><h3>Disposizione VII</h3><p>La Costituzione è promulgata dal Capo definitivo della R.E.G.I.N.A. immediatamente nel giorno della sua approvazione da parte dell’Assemblea Costituente ed entra in vigore il 1º gennaio 2023. Il testo è depositato in almeno una stanza della R.E.G.I.N.A. per rimanervi esposto per sempre, affinché ogni cittadino possa prenderne cognizione. Munita del sigillo, sarà inserita nella Raccolta ufficiale delle leggi e dei decreti della R.E.G.I.N.A. e dovrà essere fedelmente osservata da tutti i cittadini e dagli organi della R.E.G.I.N.A..</p></article>
+        </div>
+      </section>
+
+      <section class="book-card" id="libro-6">
+        <h2 class="book-title">Libro VI · APPENDICE</h2>
+        <div class="book-intro"><p>Modulistica per la presa visione della Costituzione e per le procedure richiamate nei suoi articoli.</p></div>
+        <div class="article-list">
+          <article class="article" id="modulo-a"><h3>MODULO A · Modulo di presa visione della Costituzione della R.E.G.I.N.A.</h3><p>Modulo per dichiarare di aver preso visione della Costituzione, con dati del sottoscritto, periodo di permanenza, luogo e data, firma del Re e firma del richiedente.</p></article>
+          <article class="article" id="modulo-b"><h3>MODULO B · Modulo di richiesta di accesso alle stanze</h3><p>Modulo per richiedere l’accesso alle stanze indicate: cucina, camera da letto, bagno o altro, specificando il motivo; prevede luogo, data e firme.</p></article>
+          <article class="article" id="modulo-c"><h3>MODULO C · Modulo di organizzazione settimanale</h3><p>Modulo di sottoscrizione dell’orario settimanale, con periodo di validità, firme e tabella settimanale delle attività.</p></article>
+          <article class="article" id="modulo-d"><h3>MODULO D · Modulo T.A.C. — «Teo Analizza Chiunque»</h3><p>Modulo di valutazione articolato in anamnesi, diagnosi, sezione “In casa” e considerazioni finali, con punteggio e giudizio conclusivo.</p></article>
+          <article class="article" id="modulo-e"><h3>MODULO E · Verbale per la seduta del capitolo generale della R.E.G.I.N.A.</h3><p>Modulo per indicare data, partecipanti, articoli considerati, dichiarazione, giudizio finale, luogo, data e firme.</p></article>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer class="footer">La COSTITUZIONE della R.E.G.I.N.A.</footer>
+
+  <script>
+    const search = document.getElementById('search');
+    const navList = document.getElementById('navList');
+    const navGroups = [...navList.querySelectorAll('.nav-group')];
+    const emptySearch = document.getElementById('emptySearch');
+
+    search.addEventListener('input', () => {
+      const query = search.value.trim().toLocaleLowerCase('it');
+      let visibleCount = 0;
+      navGroups.forEach(group => {
+        const links = [...group.querySelectorAll('a')];
+        let groupVisible = false;
+        links.forEach(link => {
+          const matches = !query || link.textContent.toLocaleLowerCase('it').includes(query);
+          link.hidden = !matches;
+          if (matches) { groupVisible = true; visibleCount++; }
+        });
+        group.hidden = !groupVisible;
+      });
+      emptySearch.style.display = visibleCount ? 'none' : 'block';
+    });
+
+    document.getElementById('toggleNav').addEventListener('click', () => {
+      const nav = document.getElementById('navList');
+      nav.hidden = !nav.hidden;
+    });
+  </script>
+</body>
+</html>
