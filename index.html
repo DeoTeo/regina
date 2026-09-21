@@ -196,8 +196,8 @@
     <div class="topbar-inner">
           <img src="assets/logo.png" class="header-logo">
           <p class="eyebrow">Testo costituzionale · Edizione digitale</p>
-          <h1>La COSTITUZIONE<br>della R.E.G.I.N.A.</h1>
-          <p class="subtitle">Regno Eterno e Glorioso Illuminato da Numerose Api</p>
+          <h1>La Costituzione<br>della R.E.G.I.N.A.</h1>
+          <p class="subtitle"><b>R</b>egno <b>E</b>terno e <b>G</b>lorioso <b>I</b>lluminato da <b>N</b>umerose <b>A</b>pi</p>
       <div class="top-actions">
         <a href="#indice">☷ Indice</a>
         <a href="costituzione.pdf" target="_blank" rel="noopener">↗ Apri il testo originale della Costituzione</a>
@@ -441,7 +441,7 @@
       </section>
     </section>
   </main>
-  <footer class="footer">La COSTITUZIONE della R.E.G.I.N.A.</footer>
+  <footer class="footer">Matteo Rex · La Costituzione della R.E.G.I.N.A.</footer>
 
   <script>
     const search = document.getElementById('search');
@@ -450,23 +450,16 @@
     const emptySearch = document.getElementById('emptySearch');
 
     search.addEventListener('input', () => {
-
         const query = search.value.trim().toLowerCase();
         let visibleCount = 0;
-    
         navGroups.forEach(group => {
-    
-            let groupVisible = false;
-    
+            let groupHasResults = false;
             group.querySelectorAll('a').forEach(link => {
-    
                 const href = link.getAttribute('href');
-    
-                // di default nascondi tutto
-                let visible = !query;
-    
-                // Cerca solo in articoli, disposizioni e moduli
-                if (
+                let visible = false;
+                if (!query) {
+                    visible = true;
+                } else if (
                     href &&
                     (
                         href.startsWith('#art-') ||
@@ -474,31 +467,34 @@
                         href.startsWith('#modulo-')
                     )
                 ) {
-    
-                    const target = document.getElementById(href.substring(1));
-    
-                    if (target) {
-                        visible = target.textContent
+                    const target = document.getElementById(
+                        href.substring(1)
+                    );
+                    if (
+                        target &&
+                        target.textContent
                             .toLowerCase()
-                            .includes(query);
+                            .includes(query)
+                    ) {
+                        visible = true;
+                        groupHasResults = true;
                     }
                 }
-    
-                // se la ricerca è vuota mostra tutto
-                if (!query) {
-                    visible = true;
-                }
-    
                 link.hidden = !visible;
     
                 if (visible) {
-                    groupVisible = true;
                     visibleCount++;
                 }
-    
             });
     
-            group.hidden = !groupVisible;
+            // mostra il titolo del gruppo solo se contiene risultati
+            const heading = group.querySelector('.nav-heading');
+    
+            if (heading) {
+                heading.hidden = query && !groupHasResults;
+            }
+    
+            group.hidden = query && !groupHasResults;
     
         });
     
