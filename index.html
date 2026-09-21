@@ -202,6 +202,7 @@
         <a href="#indice">☷ Indice</a>
         <a href="costituzione.pdf" target="_blank" rel="noopener">↗ Apri il testo originale della Costituzione</a>
         <a href="God_Save_The_R.E.G.I.N.A..pdf" target="_blank" rel="noopener">↗ Apri il testo dell'Inno Ufficiale</a>
+        <button id="playInno" class="btn">▶ Riproduci l'Inno Ufficiale</button>
       </div>
       <button class="btn secondary mobile-nav-toggle" id="toggleNav" type="button">Mostra / nascondi indice</button>
     </div>
@@ -509,6 +510,22 @@
     document.getElementById('toggleNav').addEventListener('click', () => {
       const nav = document.getElementById('navList');
       nav.hidden = !nav.hidden;
+    });
+
+    const audioInno = new Audio('assets/inno.mp3');
+    const btnInno = document.getElementById('playInno');
+    btnInno.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (audioInno.paused) {
+            audioInno.play();
+            btnInno.textContent = '⏸ Metti in pausa l\'Inno';
+        } else {
+            audioInno.pause();
+            btnInno.textContent = '▶ Riproduci l\'Inno Ufficiale';
+        }
+    });
+    audioInno.addEventListener('ended', () => {
+        btnInno.textContent = '▶ Riproduci l\'Inno Ufficiale';
     });
   </script>
 </body>
