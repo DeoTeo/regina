@@ -1,4 +1,4 @@
-const CACHE_NAME = "imladris-v1";
+const CACHE_NAME = "regina-v1";
 
 const FILES = [
     "./",
