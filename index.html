@@ -455,17 +455,29 @@
             let groupVisible = false;
             group.querySelectorAll('a').forEach(link => {
                 const href = link.getAttribute('href');
-                let articleText = '';
-                if (href && href.startsWith('#')) {
-                    const target = document.getElementById(href.substring(1));
+                const textMatch = link.textContent.toLowerCase().includes(query);
+                let articleMatch = false;
+                if (
+                    href &&
+                    (
+                        href.startsWith('#art-') ||
+                        href.startsWith('#disp-') ||
+                        href.startsWith('#modulo-')
+                    )
+                ) {
+                    const target = document.getElementById(
+                        href.substring(1)
+                    );
                     if (target) {
-                        articleText = target.textContent.toLowerCase();
+                        articleMatch = target.textContent
+                            .toLowerCase()
+                            .includes(query);
                     }
                 }
                 const visible =
                     !query ||
-                    link.textContent.toLowerCase().includes(query) ||
-                    articleText.includes(query);
+                    textMatch ||
+                    articleMatch;
                 link.hidden = !visible;
                 if (visible) {
                     groupVisible = true;
