@@ -1,0 +1,20 @@
+{
+    "name": "Cronaca del Giorno negli Annali degli Eldar",
+    "short_name": "Ainulindalë",
+    "description": "Il calendario elfico di Imladris",
+    "lang": "it",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#171521",
+    "theme_color": "#171521",
+    "icons": [
+    {
+      "src": "icon-180.PNG",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
