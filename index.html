@@ -449,14 +449,22 @@
     const emptySearch = document.getElementById('emptySearch');
 
     search.addEventListener('input', () => {
+
         const query = search.value.trim().toLowerCase();
         let visibleCount = 0;
+    
         navGroups.forEach(group => {
+    
             let groupVisible = false;
+    
             group.querySelectorAll('a').forEach(link => {
+    
                 const href = link.getAttribute('href');
-                const textMatch = link.textContent.toLowerCase().includes(query);
-                let articleMatch = false;
+    
+                // di default nascondi tutto
+                let visible = !query;
+    
+                // Cerca solo in articoli, disposizioni e moduli
                 if (
                     href &&
                     (
@@ -465,29 +473,37 @@
                         href.startsWith('#modulo-')
                     )
                 ) {
-                    const target = document.getElementById(
-                        href.substring(1)
-                    );
+    
+                    const target = document.getElementById(href.substring(1));
+    
                     if (target) {
-                        articleMatch = target.textContent
+                        visible = target.textContent
                             .toLowerCase()
                             .includes(query);
                     }
                 }
-                const visible =
-                    !query ||
-                    textMatch ||
-                    articleMatch;
+    
+                // se la ricerca è vuota mostra tutto
+                if (!query) {
+                    visible = true;
+                }
+    
                 link.hidden = !visible;
+    
                 if (visible) {
                     groupVisible = true;
                     visibleCount++;
                 }
+    
             });
+    
             group.hidden = !groupVisible;
+    
         });
+    
         emptySearch.style.display =
             visibleCount ? 'none' : 'block';
+    
     });
 
     document.getElementById('toggleNav').addEventListener('click', () => {
