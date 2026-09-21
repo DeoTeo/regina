@@ -450,51 +450,53 @@
     const emptySearch = document.getElementById('emptySearch');
 
     search.addEventListener('input', () => {
+
         const query = search.value.trim().toLowerCase();
         let visibleCount = 0;
-        navGroups.forEach(group => {
-            let groupHasResults = false;
-            group.querySelectorAll('a').forEach(link => {
-                const href = link.getAttribute('href');
-                let visible = false;
-                if (!query) {
-                    visible = true;
-                } else if (
-                    href &&
-                    (
-                        href.startsWith('#art-') ||
-                        href.startsWith('#disp-') ||
-                        href.startsWith('#modulo-')
-                    )
-                ) {
-                    const target = document.getElementById(
-                        href.substring(1)
-                    );
-                    if (
-                        target &&
-                        target.textContent
-                            .toLowerCase()
-                            .includes(query)
-                    ) {
-                        visible = true;
-                        groupHasResults = true;
-                    }
-                }
-                link.hidden = !visible;
     
-                if (visible) {
-                    visibleCount++;
-                }
-            });
+        document.querySelectorAll('#navList a').forEach(link => {
     
-            // mostra il titolo del gruppo solo se contiene risultati
-            const heading = group.querySelector('.nav-heading');
+            const href = link.getAttribute('href');
     
-            if (heading) {
-                heading.hidden = query && !groupHasResults;
+            // Mostra tutto se la ricerca è vuota
+            if (!query) {
+                link.style.display = '';
+                visibleCount++;
+                return;
             }
     
-            group.hidden = query && !groupHasResults;
+            // Filtra SOLO articoli, disposizioni e moduli
+            if (
+                href &&
+                (
+                    href.startsWith('#art-') ||
+                    href.startsWith('#disp-') ||
+                    href.startsWith('#modulo-')
+                )
+            ) {
+    
+                const target = document.getElementById(
+                    href.substring(1)
+                );
+    
+                const found =
+                    target &&
+                    target.textContent
+                        .toLowerCase()
+                        .includes(query);
+    
+                link.style.display = found ? '' : 'none';
+    
+                if (found) {
+                    visibleCount++;
+                }
+    
+            } else {
+    
+                // Nasconde sempre libri e titoli durante la ricerca
+                link.style.display = 'none';
+    
+            }
     
         });
     
