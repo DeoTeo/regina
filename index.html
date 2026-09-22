@@ -115,25 +115,28 @@
       padding: 12px 14px; border-radius: 0 9px 9px 0; margin-top: 16px;
       font-size: .9rem;
     }
-    .book-card { margin: 18px 0; overflow: hidden; scroll-margin-top: 14px; }
+    .book-card {
+      margin: 18px 0;
+      overflow: visible;
+      scroll-margin-top: 14px;
+    }
     .book-title {
       margin: 0;
       padding: 14px 22px;
-      background: rgba(251, 248, 248, 0.96);
+      background: rgba(251, 248, 248, 0.97);
       border-bottom: 1px solid var(--line);
       color: var(--maroon);
+    
       font: 600 clamp(1.05rem, 3vw, 1.55rem)/1.3 Georgia, serif;
     
-      /* Rimane visibile durante lo scorrimento */
       position: sticky;
-      top: 0;
-      z-index: 20;
+      top: 5px;
+      z-index: 100;
     
-      /* Effetto leggermente "vetroso" */
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     }
     .book-intro { padding: 15px 22px; color: #4b5563; border-bottom: 1px solid var(--line); }
     .book-intro p { margin: 0; }
@@ -201,6 +204,14 @@
       width:140px;
       height:auto;
       margin:0 auto;
+    }
+    .article-list > h3[id^="titolo-"] {
+      position: sticky;
+      top: 58px;
+      z-index: 90;
+      background: var(--paper);
+      padding: 10px 0 8px;
+      border-bottom: 1px solid var(--line);
     }
     /* =========================
        BARRA DI AVANZAMENTO
